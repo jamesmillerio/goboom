@@ -7,13 +7,15 @@ import (
 	"testing"
 )
 
+const boomTestingFileLocation string = "./.boom"
+
 func TestAllCommand(t *testing.T) {
 
 	expectedList := "tests"
 	expectedEntryKey := "test1:"
 	expectedEntryValue := "Hello world 1\n"
 	buffer := new(bytes.Buffer)
-	storage := NewCustomListStorage("./.boom")
+	storage := NewCustomListStorage(boomTestingFileLocation)
 	all := NewAllCommand()
 	all.Execute(buffer, storage)
 	actual := buffer.String()
@@ -40,7 +42,7 @@ func TestAllListCommand(t *testing.T) {
 	expectedEntryKey := "test1:"
 	expectedEntryValue := "Hello world 1\n"
 	buffer := new(bytes.Buffer)
-	storage := NewCustomListStorage("./.boom")
+	storage := NewCustomListStorage(boomTestingFileLocation)
 	all := NewAllListCommand(list)
 	all.Execute(buffer, storage)
 	actual := buffer.String()
@@ -61,7 +63,7 @@ func TestEchoCommand(t *testing.T) {
 
 	expected := "Hello world 1\n"
 	buffer := new(bytes.Buffer)
-	storage := NewCustomListStorage("./.boom")
+	storage := NewCustomListStorage(boomTestingFileLocation)
 	echo := NewEchoEntryCommand("test1")
 	echo.Execute(buffer, storage)
 	actual := buffer.String()
@@ -78,7 +80,7 @@ func TestEchoSpecificEntryCommand(t *testing.T) {
 
 	expected := "Hello world 1\n"
 	buffer := new(bytes.Buffer)
-	storage := NewCustomListStorage("./.boom")
+	storage := NewCustomListStorage(boomTestingFileLocation)
 	echo := NewEchoSpecificEntryCommand("tests", "test1")
 	echo.Execute(buffer, storage)
 	actual := buffer.String()
@@ -97,7 +99,7 @@ func TestEchoCommandNotFound(t *testing.T) {
 	entry := "test9123"
 	expected := fmt.Sprintf("%v not found in %v.\n", entry, list)
 	buffer := new(bytes.Buffer)
-	storage := NewCustomListStorage("./.boom")
+	storage := NewCustomListStorage(boomTestingFileLocation)
 	echo := NewEchoSpecificEntryCommand(list, entry)
 	echo.Execute(buffer, storage)
 	actual := buffer.String()
