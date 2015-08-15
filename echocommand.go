@@ -59,10 +59,13 @@ func (c *EchoCommand) Execute(w io.Writer, s Storage) {
 					for key, value := range entry {
 						if key == c.Entry {
 							fmt.Fprint(w, value+"\n")
+							return
 						}
 					}
 				}
 			}
 		}
 	}
+
+	fmt.Fprintf(w, "%v not found in %v.\n", c.Entry, c.List)
 }
