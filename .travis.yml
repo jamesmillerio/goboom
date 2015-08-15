@@ -3,5 +3,7 @@ language: go
 go:
   - tip
 
+script: go test
+
 install:
   - go get github.com/atotto/clipboard
