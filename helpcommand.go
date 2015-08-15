@@ -13,7 +13,7 @@ type HelpCommand struct {
 	commands    []Command
 }
 
-//NewHelpEntryCommand creates a command that Helpes
+//NewHelpCommand creates a command that Helpes
 //the first entry it finds with the specified name.
 func NewHelpCommand(commands []Command) *HelpCommand {
 	command := new(HelpCommand)

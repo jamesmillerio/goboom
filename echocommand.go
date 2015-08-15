@@ -5,7 +5,7 @@ import (
 	"io"
 )
 
-//EchCommand facilitates the echoing
+//EchoCommand facilitates the echoing
 //of a value to screen.
 type EchoCommand struct {
 	definition  string

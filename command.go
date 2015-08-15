@@ -2,7 +2,7 @@ package main
 
 import "io"
 
-//Comand defines the common functions
+//Command defines the common functions
 //a Command struct should have to facilitate
 //store/retrieving/acting on key/values.
 type Command interface {
