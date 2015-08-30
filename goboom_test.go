@@ -16,7 +16,7 @@ func TestAllCommand(t *testing.T) {
 	expectedEntryValue := "Hello world 1\n"
 	buffer := new(bytes.Buffer)
 	storage := NewCustomListStorage(boomTestingFileLocation)
-	all := NewAllCommand()
+	all := NewAllCommand(nil)
 	all.Execute(buffer, storage)
 	actual := buffer.String()
 
@@ -43,7 +43,7 @@ func TestAllListCommand(t *testing.T) {
 	expectedEntryValue := "Hello world 1\n"
 	buffer := new(bytes.Buffer)
 	storage := NewCustomListStorage(boomTestingFileLocation)
-	all := NewAllListCommand(list)
+	all := NewAllListCommand(list, nil)
 	all.Execute(buffer, storage)
 	actual := buffer.String()
 
