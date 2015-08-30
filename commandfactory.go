@@ -4,7 +4,7 @@ import "strings"
 
 //CreateCommand is a factory method that returns the command that
 //is infered from the passed command line arguments.
-func CreateCommand(args []string) Command {
+func CreateCommand(args []string, translator Translator) Command {
 
 	if args == nil || len(args) == 0 {
 		return new(OverviewCommand)
@@ -15,7 +15,7 @@ func CreateCommand(args []string) Command {
 
 	switch command {
 	case "all":
-		return new(AllCommand)
+		return NewAllCommand(translator)
 	case "delete":
 		if count == 2 { //Delete list
 			return NewDeleteListCommand(args[1])
@@ -47,7 +47,7 @@ func CreateCommand(args []string) Command {
 		}
 		return NewCopySpecificEntryCommand(args[1], args[2])
 	default:
-		return NewCatchAllCommand(args)
+		return NewCatchAllCommand(args, translator)
 	}
 
 	return nil

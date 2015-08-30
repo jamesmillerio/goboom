@@ -19,13 +19,20 @@ func main() {
 	}
 
 	var command Command
+	var translator Translator
 
 	//Define some common flags.
 	data := flag.String("data", user.HomeDir+"/.boom", "Defines the path to the desired .boom file. Defaults to ~/.boom if not specified.")
 	help := flag.Bool("help", false, "Displys usage information for goboom.")
+	alfred := flag.Bool("alfred", false, "Displays boom information in an format an Alfred Script Filter can consume.")
 
 	//Grab any defined flags/args.
 	flag.Parse()
+
+	//If we're looking for an alfred script filter, create it.
+	if *alfred {
+		translator = NewAlfredScriptFilterTranslator()
+	}
 
 	//Create our tab writer so everything lines up.
 	writer := new(tabwriter.Writer)
@@ -48,7 +55,7 @@ func main() {
 	} else {
 
 		//Get the specified command.
-		command = CreateCommand(flag.Args())
+		command = CreateCommand(flag.Args(), translator)
 
 	}
 
@@ -67,10 +74,10 @@ func getAllCommands() []Command {
 	var commands []Command
 
 	commands = append(commands, new(OverviewCommand))
-	commands = append(commands, NewAllCommand())
+	commands = append(commands, NewAllCommand(nil))
 	commands = append(commands, nil)
 	commands = append(commands, NewCreateListCommand(""))
-	commands = append(commands, NewAllListCommand(""))
+	commands = append(commands, NewAllListCommand("", nil))
 	commands = append(commands, NewDeleteListCommand(""))
 	commands = append(commands, nil)
 	commands = append(commands, NewCreateEntryCommand("", "", ""))

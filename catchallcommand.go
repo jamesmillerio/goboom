@@ -18,7 +18,7 @@ type CatchAllCommand struct {
 
 //NewCatchAllCommand creates a command that
 //can be used to delete the specified list.
-func NewCatchAllCommand(args []string) *CatchAllCommand {
+func NewCatchAllCommand(args []string, translator Translator) *CatchAllCommand {
 	command := new(CatchAllCommand)
 	count := len(args)
 
@@ -37,7 +37,7 @@ func NewCatchAllCommand(args []string) *CatchAllCommand {
 			command.commands[0] = NewCopyEntryCommand(args[0])
 		} else if list != nil {
 			//Print entries in list command.
-			command.commands[0] = NewAllListCommand(args[0])
+			command.commands[0] = NewAllListCommand(args[0], translator)
 		} else if list == nil {
 			command.commands[0] = NewCreateListCommand(args[0])
 		}
