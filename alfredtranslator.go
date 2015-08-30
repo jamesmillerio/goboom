@@ -27,8 +27,8 @@ func (t *AlfredScriptFilterTranslator) Initialize(w io.Writer, s Storage) {
 //Execute performs the requested translation.
 func (t *AlfredScriptFilterTranslator) Execute(w io.Writer, s Storage, list string, key string, value string) {
 	fmt.Fprintf(w, "<item uid=\"%s:%s:%s\" arg=\"%s %s\">\n", list, key, value, list, key)
-	fmt.Fprintf(w, "<title>%s: \"%s\"</title>\n", key, value)
-	fmt.Fprintf(w, "<subtitle>In list: %s</subtitle>\n", list)
+	fmt.Fprintf(w, "<title>%s</title>\n", key)
+	fmt.Fprintf(w, "<subtitle>%s</subtitle>\n", value)
 	fmt.Fprintf(w, "<icon type=\"fileicon\">alfredhat.png</icon>\n")
 	fmt.Fprint(w, "</item>\n")
 }
